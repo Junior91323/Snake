@@ -10,7 +10,10 @@ namespace Snake
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello Snake");
+
+            Point p1 = new Point(12, 2, '*', ConsoleColor.Green);
+            p1.Drow();
+            Console.ReadKey();
         }
     }
 }

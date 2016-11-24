@@ -10,6 +10,7 @@ namespace Snake
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(100, 50);
             Console.SetBufferSize(100, 50);
             DrowFrame();
             Console.ReadKey();

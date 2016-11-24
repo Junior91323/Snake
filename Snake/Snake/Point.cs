@@ -8,15 +8,11 @@ namespace Snake
 {
     public class Point
     {
-        public short X { get; set; }
-        public short Y { get; set; }
-        public char Symbol { get; set; }
-        public ConsoleColor Color { get; set; }
+        private short X { get; set; }
+        private short Y { get; set; }
+        private char Symbol { get; set; }
+        private ConsoleColor Color { get; set; }
 
-        public Point()
-        {
-
-        }
         public Point(short x, short y, char symbol, ConsoleColor color)
         {
             this.X = x;

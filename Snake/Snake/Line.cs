@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-    class Line
+    class Line : Figure
     {
         public enum LineType
         {
@@ -14,23 +14,11 @@ namespace Snake
             Vertical
         }
 
-        private List<Point> _PointList;
-
         public Line(Point start, int length, LineType type)
         {
             if (start != null)
             {
                 InitPointList(start, length, type);
-            }
-        }
-
-        public void Drow()
-        {
-            foreach (Point point in this._PointList)
-            {
-                Console.SetCursorPosition(point.X, point.Y);
-                Console.ForegroundColor = point.Color;
-                Console.Write(point.Symbol);
             }
         }
 

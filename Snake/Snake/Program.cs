@@ -10,18 +10,21 @@ namespace Snake
     {
         static void Main(string[] args)
         {
-            Point p1 = new Point(11, 2, '-', ConsoleColor.Green);
-            Point p2 = new Point(10, 2, 'I', ConsoleColor.Red);
-            // p1.Drow();
-
-
-            Line hLine = new Line(p1, 10, Line.LineType.Horizontal);
-            hLine.Drow();
-
-            Line vLine = new Line(p2, 10, Line.LineType.Vertical);
-            vLine.Drow();
-
+            Console.SetBufferSize(100, 50);
+            DrowFrame();
             Console.ReadKey();
+        }
+        static void DrowFrame()
+        {
+            Line lLine = new Line(new Point(0, 1, '#', ConsoleColor.White), Console.BufferHeight-1, Line.LineType.Vertical);
+            Line rLine = new Line(new Point(Console.BufferWidth-1, 1, '#', ConsoleColor.White), Console.BufferHeight-1, Line.LineType.Vertical);
+            Line tLine = new Line(new Point(1, 1, '#', ConsoleColor.White), Console.BufferWidth-1, Line.LineType.Horizontal);
+            Line bLine = new Line(new Point(0, Console.BufferHeight-1, '#', ConsoleColor.White), Console.BufferWidth, Line.LineType.Horizontal);
+
+            lLine.Drow();
+            rLine.Drow();
+            tLine.Drow();
+            bLine.Drow();
         }
     }
 }

@@ -53,11 +53,28 @@ namespace Snake
             this._Symbol = symbol;
             this._Color = color;
         }
+        public Point(Point point)
+        {
+            this._X = point.X;
+            this._Y = point.Y;
+            this._Symbol = point.Symbol;
+            this._Color = point.Color;
+        }
         public void Drow()
         {
             Console.SetCursorPosition(this.X, this.Y);
             Console.ForegroundColor = this.Color;
             Console.Write(this.Symbol);
+        }
+        public void Move(int offset, Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Left: this._X = this._X - offset; break;
+                case Direction.Right: this._X = this._X + offset; break;
+                case Direction.Top: this._Y = this._Y - offset; break;
+                case Direction.Bottom: this._Y = this._Y + offset; break;
+            }
         }
     }
 }

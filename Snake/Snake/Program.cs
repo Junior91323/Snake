@@ -13,6 +13,10 @@ namespace Snake
             Console.SetWindowSize(100, 50);
             Console.SetBufferSize(100, 50);
             DrowFrame();
+
+            Snake snake = new Snake(new Point(50,25,'*',ConsoleColor.Green),3,Direction.Right);
+            snake.Drow();
+
             Console.ReadKey();
         }
         static void DrowFrame()

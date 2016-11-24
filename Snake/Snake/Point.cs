@@ -22,6 +22,7 @@ namespace Snake
             {
                 return _X;
             }
+            set { this._X = value; }
         }
         public int Y
         {
@@ -29,6 +30,7 @@ namespace Snake
             {
                 return _Y;
             }
+            set { this._Y = value; }
         }
         public char Symbol
         {
@@ -36,6 +38,7 @@ namespace Snake
             {
                 return _Symbol;
             }
+            set { this._Symbol = value; }
         }
         public ConsoleColor Color
         {
@@ -43,6 +46,7 @@ namespace Snake
             {
                 return _Color;
             }
+            set { this._Color = value; }
         }
         #endregion
 
@@ -80,6 +84,10 @@ namespace Snake
         {
             _Symbol = ' ';
             this.Drow();
+        }
+        public bool IsHit(Point item)
+        {
+            return item.X == this.X && item.Y == this.Y;
         }
     }
 }

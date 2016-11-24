@@ -14,22 +14,40 @@ namespace Snake
             Console.SetWindowSize(100, 50);
             Console.SetBufferSize(100, 50);
             DrowFrame();
-
-            Snake snake = new Snake(new Point(50,25,'*',ConsoleColor.Green),3,Direction.Right);
+            Snake snake = new Snake(new Point(50, 25, '*', ConsoleColor.Green), 10, Direction.Right);
             snake.Drow();
-            for (int i = 0; i<20; i++)
+
+            FoodCreator foodCreator = new FoodCreator(Console.BufferWidth, Console.BufferHeight, '@');
+            Point foodItem = foodCreator.Create();
+            foodItem.Drow();
+
+            while (true)
             {
-                Thread.Sleep(300);
-                snake.Move();
+                if (snake.Eat(foodItem))
+                {
+                    foodItem = foodCreator.Create();
+                    foodItem.Drow();
+                    snake.Score();
+                }
+                else
+                {
+                    snake.Move();
+                }
+                Thread.Sleep(100);
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    snake.HandleKey(key.Key);
+                }
+
             }
-            Console.ReadKey();
         }
         static void DrowFrame()
         {
-            Line lLine = new Line(new Point(0, 1, '#', ConsoleColor.White), Console.BufferHeight-1, Line.LineType.Vertical);
-            Line rLine = new Line(new Point(Console.BufferWidth-1, 1, '#', ConsoleColor.White), Console.BufferHeight-1, Line.LineType.Vertical);
-            Line tLine = new Line(new Point(1, 1, '#', ConsoleColor.White), Console.BufferWidth-1, Line.LineType.Horizontal);
-            Line bLine = new Line(new Point(0, Console.BufferHeight-1, '#', ConsoleColor.White), Console.BufferWidth, Line.LineType.Horizontal);
+            Line lLine = new Line(new Point(0, 2, '#', ConsoleColor.White), Console.BufferHeight - 3, Line.LineType.Vertical);
+            Line rLine = new Line(new Point(Console.BufferWidth - 1, 2, '#', ConsoleColor.White), Console.BufferHeight - 3, Line.LineType.Vertical);
+            Line tLine = new Line(new Point(0, 2, '#', ConsoleColor.White), Console.BufferWidth, Line.LineType.Horizontal);
+            Line bLine = new Line(new Point(0, Console.BufferHeight - 1, '#', ConsoleColor.White), Console.BufferWidth, Line.LineType.Horizontal);
 
             lLine.Drow();
             rLine.Drow();

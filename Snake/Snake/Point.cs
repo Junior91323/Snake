@@ -6,19 +6,52 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-    public class Point
+    class Point
     {
-        private short X { get; set; }
-        private short Y { get; set; }
-        private char Symbol { get; set; }
-        private ConsoleColor Color { get; set; }
+        #region Fields
+        private int _X;
+        private int _Y;
+        private char _Symbol;
+        private ConsoleColor _Color;
+        #endregion
 
-        public Point(short x, short y, char symbol, ConsoleColor color)
+        #region Properties
+        public int X
         {
-            this.X = x;
-            this.Y = y;
-            this.Symbol = symbol;
-            this.Color = color;
+            get
+            {
+                return _X;
+            }
+        }
+        public int Y
+        {
+            get
+            {
+                return _Y;
+            }
+        }
+        public char Symbol
+        {
+            get
+            {
+                return _Symbol;
+            }
+        }
+        public ConsoleColor Color
+        {
+            get
+            {
+                return _Color;
+            }
+        }
+        #endregion
+
+        public Point(int x, int y, char symbol, ConsoleColor color)
+        {
+            this._X = x;
+            this._Y = y;
+            this._Symbol = symbol;
+            this._Color = color;
         }
         public void Drow()
         {

@@ -76,5 +76,10 @@ namespace Snake
                 case Direction.Bottom: this._Y = this._Y + offset; break;
             }
         }
+        public void Clear()
+        {
+            _Symbol = ' ';
+            this.Drow();
+        }
     }
 }

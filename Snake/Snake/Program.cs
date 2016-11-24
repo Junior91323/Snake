@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Snake
@@ -16,7 +17,11 @@ namespace Snake
 
             Snake snake = new Snake(new Point(50,25,'*',ConsoleColor.Green),3,Direction.Right);
             snake.Drow();
-
+            for (int i = 0; i<20; i++)
+            {
+                Thread.Sleep(300);
+                snake.Move();
+            }
             Console.ReadKey();
         }
         static void DrowFrame()

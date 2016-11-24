@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-
+    
     class Snake : Figure
     {
+        public int Score
+        {
+            get { return _PointList.Count - StartLenght; }
+        }
         private Direction Direction;
         private static int StartLenght;
         public Snake(Point tail, int lenght, Direction direction)
@@ -76,10 +80,10 @@ namespace Snake
             return false;
         }
 
-        public void Score()
+        public void ShowScore()
         {
             Console.SetCursorPosition(0, 0);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(_PointList.Count - StartLenght);
         }
     }

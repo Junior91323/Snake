@@ -14,6 +14,7 @@ namespace Snake
             Console.SetWindowSize(100, 50);
             Console.SetBufferSize(100, 50);
             DrowFrame();
+
             Snake snake = new Snake(new Point(50, 25, '*', ConsoleColor.Green), 10, Direction.Right);
             snake.Drow();
 
@@ -27,13 +28,13 @@ namespace Snake
                 {
                     foodItem = foodCreator.Create();
                     foodItem.Drow();
-                    snake.Score();
+                    snake.ShowScore();
                 }
                 else
                 {
                     snake.Move();
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(100-snake.Score);
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();

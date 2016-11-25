@@ -21,11 +21,18 @@ namespace Snake
             this.Symbol = symbol;
         }
 
-        public Point Create()
+        public Point Create(Figure figure)
         {
-            int x = random.Next(2, this.MapWidth - 2);
-            int y = random.Next(2, this.MapHeight - 2);
-            return new Point(x, y, this.Symbol, ConsoleColor.Yellow);
+            int x = random.Next(3, this.MapWidth - 3);
+            int y = random.Next(3, this.MapHeight - 3);
+            Point food = new Point(x, y, this.Symbol, ConsoleColor.Yellow);
+            if (figure.IsHit(food))
+            {
+                food.Clear();
+                Create(figure);
+            }
+
+            return food;
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-    
+
     class Snake : Figure
     {
         public int Score
@@ -26,6 +26,38 @@ namespace Snake
                 point.Move(i, direction);
                 _PointList.Add(point);
             }
+        }
+
+        internal bool IsHitTail()
+        {
+            Point head = _PointList.LastOrDefault();
+            if (head != null)
+            {
+                for (int i = 0; i < _PointList.Count - 2; i++)
+                {
+                    if (head.IsHit(_PointList[i]))
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool IsNotReverseDirection(ConsoleKey key)
+        {
+            if (this.Direction == Direction.Left && key == ConsoleKey.RightArrow)
+                return false;
+
+            if (this.Direction == Direction.Right && key == ConsoleKey.LeftArrow)
+                return false;
+
+            if (this.Direction == Direction.Top && key == ConsoleKey.DownArrow)
+                return false;
+
+            if (this.Direction == Direction.Bottom && key == ConsoleKey.UpArrow)
+                return false;
+
+            return true;
         }
 
         public void Move()
@@ -50,19 +82,22 @@ namespace Snake
             {
                 newHead = new Point(head);
                 newHead.Move(1, Direction);
-                
+
             }
             return newHead;
         }
 
         public void HandleKey(ConsoleKey key)
         {
-            switch (key)
+            if (IsNotReverseDirection(key))
             {
-                case ConsoleKey.LeftArrow: this.Direction = Direction.Left; break;
-                case ConsoleKey.RightArrow: this.Direction = Direction.Right; break;
-                case ConsoleKey.UpArrow: this.Direction = Direction.Top; break;
-                case ConsoleKey.DownArrow: this.Direction = Direction.Bottom; break;
+                switch (key)
+                {
+                    case ConsoleKey.LeftArrow: this.Direction = Direction.Left; break;
+                    case ConsoleKey.RightArrow: this.Direction = Direction.Right; break;
+                    case ConsoleKey.UpArrow: this.Direction = Direction.Top; break;
+                    case ConsoleKey.DownArrow: this.Direction = Direction.Bottom; break;
+                }
             }
         }
 

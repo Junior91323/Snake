@@ -9,24 +9,34 @@ namespace Snake
 {
     class Program
     {
+        const int Width = 100;
+        const int Height = 50;
+
         static void Main(string[] args)
         {
-            Console.SetWindowSize(100, 50);
-            Console.SetBufferSize(100, 50);
-            DrowFrame();
+            Console.Title = "Snake";
+
+            Walls walls = new Walls(Width, Height);
+            walls.Draw();
 
             Snake snake = new Snake(new Point(50, 25, '*', ConsoleColor.Green), 10, Direction.Right);
             snake.Drow();
 
             FoodCreator foodCreator = new FoodCreator(Console.BufferWidth, Console.BufferHeight, '@');
-            Point foodItem = foodCreator.Create();
+            Point foodItem = foodCreator.Create(snake);
             foodItem.Drow();
 
             while (true)
             {
+                if (walls.IsHit(snake) || snake.IsHitTail())
+                {
+                    StopGame();
+                    Console.ReadKey();
+                    break;
+                }
                 if (snake.Eat(foodItem))
                 {
-                    foodItem = foodCreator.Create();
+                    foodItem = foodCreator.Create(snake);
                     foodItem.Drow();
                     snake.ShowScore();
                 }
@@ -34,7 +44,7 @@ namespace Snake
                 {
                     snake.Move();
                 }
-                Thread.Sleep(100-snake.Score);
+                Thread.Sleep(100 - (snake.Score));
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
@@ -43,17 +53,18 @@ namespace Snake
 
             }
         }
-        static void DrowFrame()
-        {
-            Line lLine = new Line(new Point(0, 2, '#', ConsoleColor.White), Console.BufferHeight - 3, Line.LineType.Vertical);
-            Line rLine = new Line(new Point(Console.BufferWidth - 1, 2, '#', ConsoleColor.White), Console.BufferHeight - 3, Line.LineType.Vertical);
-            Line tLine = new Line(new Point(0, 2, '#', ConsoleColor.White), Console.BufferWidth, Line.LineType.Horizontal);
-            Line bLine = new Line(new Point(0, Console.BufferHeight - 1, '#', ConsoleColor.White), Console.BufferWidth, Line.LineType.Horizontal);
 
-            lLine.Drow();
-            rLine.Drow();
-            tLine.Drow();
-            bLine.Drow();
+        static void StopGame()
+        {
+            int startX = Width / 2 - 20;
+            int startY = Width / 4;
+            Console.SetCursorPosition(startX, startY);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("=======================================");
+            Console.SetCursorPosition(startX + 15, startY + 1);
+            Console.WriteLine("GAME OVER");
+            Console.SetCursorPosition(startX, startY + 2);
+            Console.WriteLine("=======================================");
         }
     }
 }

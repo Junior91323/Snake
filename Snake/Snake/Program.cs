@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace Snake
 
             Walls walls = new Walls(Width, Height);
             walls.Draw();
-
+          
             Snake snake = new Snake(new Point(50, 25, '*', ConsoleColor.Green), 10, Direction.Right);
             snake.Drow();
 
